@@ -65,11 +65,14 @@ namespace FaturamentoDiario03.Models
             }
             if (faturamentos.Count > 0)
             {
-                Console.WriteLine($"Dias com vendas acima da média({media.ToString("F4")}):");
+                int count = 0;
+                Console.WriteLine($"Dias com vendas acima da média mensal({media.ToString("F4")}):");
                 foreach (var item in faturamentos)
                 {
                     Console.WriteLine($"Dia: {item.Dia}, Valor: {item.Valor}");
+                    count++;
                 }
+                Console.WriteLine($"Total de dias: {count}");
             }
             else
             {
@@ -83,7 +86,11 @@ namespace FaturamentoDiario03.Models
             double media = 0;
             foreach (var item in deserializado)
             {
-                media += item.Valor;
+                if (item.Valor > 0)
+                {
+                    media += item.Valor;
+
+                }
             }
             return media / deserializado.Count;
         }
